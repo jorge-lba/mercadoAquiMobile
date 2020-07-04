@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 
-const Stores = () => {
+const Categorys = () => {
   return <View />
 }
 
-export default Stores
+export default Categorys

@@ -1,25 +1,25 @@
 import React from 'react'
 import {NavigationContainer} from '@react-navigation/native'
-import {createStackNavigator} from '@react-navigation/stack'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import { Feather as Icon } from '@expo/vector-icons'
 
 import Home from './pages/home'
-import Stores from './pages/Stores'
+import Categorys from './pages/Categorys'
 
-const AppStack = createStackNavigator()
+const icon = (iconName:string) => {
+  return(
+    <Icon name={iconName} size={20} color={'#aaa'} />
+  )
+}
+
+const AppStack = createBottomTabNavigator()
 
 const Routes = () => {
   return(
     <NavigationContainer>
-      <AppStack.Navigator 
-        headerMode='none' 
-        screenOptions={{
-          cardStyle:{
-            backgroundColor: '#f5f5f5'
-          }
-        }}  
-      >
-        <AppStack.Screen name='Home' component={Home} />
-        <AppStack.Screen name='Stores' component={Stores} />
+      <AppStack.Navigator >
+        <AppStack.Screen name='Lojas' component={Home} options={{tabBarIcon: () => icon('shopping-bag') }} />
+        <AppStack.Screen name='Categorias' component={Categorys} options={{tabBarIcon: () => icon('package'), }} />
 
       </AppStack.Navigator>
     </NavigationContainer>

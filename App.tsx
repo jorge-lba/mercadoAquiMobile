@@ -29,10 +29,7 @@ export default function App() {
           <TouchableOpacity style={{position:'relative'}} >
             <Icon name='menu' color='#333' size={25} />
           </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft:'65%'}} >
-            <Icon name='search' color='#333' size={25} /> 
-          </TouchableOpacity>
-          <TouchableOpacity style={{marginHorizontal:10}} >
+          <TouchableOpacity style={{marginLeft:'80%'}} >
             <Icon name='shopping-cart' color='#333' size={25} />
           </TouchableOpacity>
   
