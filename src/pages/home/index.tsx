@@ -9,110 +9,62 @@ const Home = () => {
 
   }, [])
 
+  const topCards = (item:any, index:number) => (
+    <TouchableOpacity key={index} style = {styles.cards} onPress = { () => {} }>
+      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
+    </TouchableOpacity>
+  )
+
+  const categorys = (item:any, index:number) => (
+    <TouchableOpacity key={index} style = {styles.categorys} onPress = { () => {} }>
+      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
+      <Text>Test</Text>
+    </TouchableOpacity>
+  )
+
+  const items = (item:any, index:number) => (
+    <TouchableOpacity key={index} style = {styles.itens} onPress = { () => {} }>
+      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
+      <Text>Test</Text>
+  </TouchableOpacity>
+  )
+
+  const products = (item: any, index:any) => (
+    <View key={index} style = {styles.cardList} >
+      <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
+        <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
+      </TouchableOpacity>
+      <View style={styles.cardText}>
+        <Text>Titulo</Text>
+        <Text>Estado</Text>
+        <Text>Descrição</Text>
+        <Text>Tags</Text>
+      </View>
+    </View>
+  )
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.cardsContainer} >
-        <ScrollView horizontal >
-          <TouchableOpacity style = {styles.cards} onPress = { () => {} }>
-            <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.cards} onPress = { () => {} }>
-            <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.cards} onPress = { () => {} }>
-            <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.cards} onPress = { () => {} }>
-            <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
-          </TouchableOpacity>
-          <TouchableOpacity style = {styles.cards} onPress = { () => {} }>
-            <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
-          </TouchableOpacity>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+          {[1,2,3,4,5].map((item, index) => topCards(item ,index))}
         </ScrollView>
       </View>
 
       <View style={styles.categoryContainer}>
-        <ScrollView horizontal >
-            <TouchableOpacity style = {styles.categorys} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.categorys} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.categorys} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-          </ScrollView>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+          {[1,2,3].map((item, index) => categorys(item, index))}    
+        </ScrollView>
       </View>
 
       <View style={styles.itemContainer}>
-        <ScrollView horizontal >
-            <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
-              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
-              <Text>Test</Text>
-            </TouchableOpacity>
-          </ScrollView>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+          {[1,2,3,4,5,6,7,8,9,10].map((item, index) => items(item, index))}
+        </ScrollView>
       </View>
-    
-      <View style = {styles.cardList} >
-        <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
-          <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
-        </TouchableOpacity>
-        <View style={styles.cardText}>
-          <Text>Titulo</Text>
-          <Text>Estado</Text>
-          <Text>Descrição</Text>
-          <Text>Tags</Text>
-        </View>
-      </View>  
 
-      <View style = {styles.cardList} >
-        <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
-          <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
-        </TouchableOpacity>
-        <View style={styles.cardText}>
-          <Text>Titulo</Text>
-          <Text>Estado</Text>
-          <Text>Descrição</Text>
-          <Text>Tags</Text>
-        </View>
-      </View> 
+      {[0,1,2,3,4,5,6,7,8,9,10].map((item, index) => products(item, index))}
 
-      <View style = {styles.cardList} >
-        <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
-          <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
-        </TouchableOpacity>
-        <View style={styles.cardText}>
-          <Text>Titulo</Text>
-          <Text>Estado</Text>
-          <Text>Descrição</Text>
-          <Text>Tags</Text>
-        </View>
-      </View> 
-  
     </ScrollView>
   ) 
 }

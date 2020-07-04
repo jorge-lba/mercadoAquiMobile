@@ -24,7 +24,7 @@ export default function App() {
     <>
       <StatusBar barStyle='dark-content' backgroundColor='transparent' translucent />
       <View style={styles.top} >
-        <Image source={require('./assets/logo.png')} style={styles.logo} />
+        <Image source={require('./src/assets/logohorizontal.png')} style={styles.logo} />
         <View style={styles.topBar} >
           <TouchableOpacity style={{position:'relative'}} >
             <Icon name='menu' color='#333' size={25} />
@@ -52,13 +52,14 @@ export default function App() {
 
 const styles = StyleSheet.create({
   top:{
-    height:150,
+    height:140,
     backgroundColor:'#FFE600',
     justifyContent:'center',
   },
 
   topBar:{
-    height:40,
+    height:36,
+    marginTop:5,
     justifyContent:'center',
     flexDirection:'row',
     // marginTop: 18
@@ -66,9 +67,9 @@ const styles = StyleSheet.create({
 
   logo:{
     resizeMode: 'contain',
-    marginTop:20,
+    marginTop:26,
     paddingLeft:360,
-    height: 45
+    height: 24
     
   },
   input:{
