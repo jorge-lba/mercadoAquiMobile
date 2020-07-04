@@ -10,7 +10,7 @@ const Home = () => {
   }, [])
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.cardsContainer} >
         <ScrollView horizontal >
           <TouchableOpacity style = {styles.cards} onPress = { () => {} }>
@@ -30,6 +30,24 @@ const Home = () => {
           </TouchableOpacity>
         </ScrollView>
       </View>
+
+      <View style={styles.categoryContainer}>
+        <ScrollView horizontal >
+            <TouchableOpacity style = {styles.categorys} onPress = { () => {} }>
+              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
+              <Text>Test</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style = {styles.categorys} onPress = { () => {} }>
+              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
+              <Text>Test</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style = {styles.categorys} onPress = { () => {} }>
+              <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
+              <Text>Test</Text>
+            </TouchableOpacity>
+          </ScrollView>
+      </View>
+
       <View style={styles.itemContainer}>
         <ScrollView horizontal >
             <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
@@ -58,7 +76,44 @@ const Home = () => {
             </TouchableOpacity>
           </ScrollView>
       </View>
-    </View>
+    
+      <View style = {styles.cardList} >
+        <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
+          <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
+        </TouchableOpacity>
+        <View style={styles.cardText}>
+          <Text>Titulo</Text>
+          <Text>Estado</Text>
+          <Text>Descrição</Text>
+          <Text>Tags</Text>
+        </View>
+      </View>  
+
+      <View style = {styles.cardList} >
+        <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
+          <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
+        </TouchableOpacity>
+        <View style={styles.cardText}>
+          <Text>Titulo</Text>
+          <Text>Estado</Text>
+          <Text>Descrição</Text>
+          <Text>Tags</Text>
+        </View>
+      </View> 
+
+      <View style = {styles.cardList} >
+        <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
+          <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
+        </TouchableOpacity>
+        <View style={styles.cardText}>
+          <Text>Titulo</Text>
+          <Text>Estado</Text>
+          <Text>Descrição</Text>
+          <Text>Tags</Text>
+        </View>
+      </View> 
+  
+    </ScrollView>
   ) 
 }
 export default Home
@@ -91,15 +146,54 @@ const styles = StyleSheet.create({
     height: 110,
     width: '100%',
     backgroundColor: '#f0f0f0',
+    marginTop:10
   },
 
   itens:{
-    height:70,
-    width:70,
+    height:60,
+    width:60,
     borderRadius: 25,
     marginHorizontal: 5,
     alignItems:'center',
     marginTop:5
+  },
+
+  categoryContainer: {
+    height: 130,
+    width: '100%',
+    backgroundColor: '#f0f0f0',
+    alignItems:'center',
+  },
+
+  categorys:{
+    height:90,
+    width:90,
+    borderRadius: 25,
+    marginHorizontal: 5,
+    alignItems:'center',
+    marginTop:5
+  },
+
+  cardList:{
+    height:200,
+    width:'90%',
+    marginHorizontal: 20,
+    marginTop: 10,
+    borderRadius: 8,
+    backgroundColor:'#d7d7d8',
+    flexDirection:'row'
+  },
+
+  cardImage:{
+    height: 200,
+    width:'50%',
+    borderRadius:8,
+    backgroundColor:'#fff'
+  },
+
+  cardText:{
+    height:200,
+    width: 200
   },
 
   title:{
