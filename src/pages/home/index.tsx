@@ -58,9 +58,6 @@ const Home = () => {
             </TouchableOpacity>
           </ScrollView>
       </View>
-      <View>
-        
-      </View>
     </View>
   ) 
 }
