@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text, Dimensions} from 'react-native'
+import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text, Linking} from 'react-native'
 import { Feather as Icon } from '@expo/vector-icons'
 import MapView, { Marker } from 'react-native-maps'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
@@ -89,7 +89,7 @@ const Home = () => {
 
   const products = (item: any, index:any) => (
     <View key={index} style = {styles.cardList} >
-      <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
+      <TouchableOpacity style={styles.cardImage} onPress = { () => Linking.openURL(item.permalink) }>
         <Image source={ {uri:item.thumbnail}} style = {{height: '100%', resizeMode : 'contain'}}/>
       </TouchableOpacity>
       <View style={styles.cardText}>
