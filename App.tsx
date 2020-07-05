@@ -7,7 +7,6 @@ import {Roboto_400Regular, Roboto_500Medium} from '@expo-google-fonts/roboto'
 import {Ubuntu_700Bold, useFonts} from '@expo-google-fonts/ubuntu'
 
 import Routes from './src/routes'
-import { RectButton } from 'react-native-gesture-handler';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -23,28 +22,12 @@ export default function App() {
   return (
     <>
       <StatusBar barStyle='dark-content' backgroundColor='transparent' translucent />
-      <View style={styles.top} >
-        <Image source={require('./src/assets/logohorizontal.png')} style={styles.logo} />
-        <View style={styles.topBar} >
-          <TouchableOpacity style={{position:'relative'}} >
+        <View style={styles.top} >
+          <TouchableOpacity style={{paddingTop:40, marginLeft: 20}} >
             <Icon name='menu' color='#333' size={25} />
           </TouchableOpacity>
-          <TouchableOpacity style={{marginLeft:'80%'}} >
-            <Icon name='shopping-cart' color='#333' size={25} />
-          </TouchableOpacity>
-  
+          <Image source={require('./src/assets/logohorizontal.png')} style={styles.logo} />
         </View>
-        <View style={styles.topBar}>
-          <Text style={{marginHorizontal: 10}}>
-            <Icon name='map-pin' color='#333' size={18} /> 
-          </Text>
-          <Text >Enviar para Edu - Rua 9 435</Text>
-          <RectButton style={styles.button} >
-            <Text style={{color:'#fff'}}>Localizar</Text>
-          </RectButton>
-
-        </View>
-      </View>
       <Routes />
     </>
   );
@@ -52,9 +35,18 @@ export default function App() {
 
 const styles = StyleSheet.create({
   top:{
-    height:140,
+    height:70,
     backgroundColor:'#FFE600',
-    justifyContent:'center',
+    flexDirection:'row',
+    shadowColor:'#000',
+    shadowOffset:{
+      width:0,
+      height:1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
 
   topBar:{
@@ -67,14 +59,10 @@ const styles = StyleSheet.create({
 
   logo:{
     resizeMode: 'contain',
-    marginTop:26,
-    paddingLeft:360,
+    marginTop:40,
+    marginHorizontal: '25%',
     height: 24
     
-  },
-  input:{
-    backgroundColor:'#f5f5f5',
-    width:'80%'
   },
 
   button:{

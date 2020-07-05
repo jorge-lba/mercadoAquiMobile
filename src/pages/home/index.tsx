@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text} from 'react-native'
+import { Feather as Icon } from '@expo/vector-icons'
+
 import axios from 'axios'
 
 const Home = () => {
   const [initItems, setInitItems] = useState([])
+
+  const nameUser = 'Edu'
+  const distance = 50
 
   useEffect( () => {
 
@@ -17,14 +22,14 @@ const Home = () => {
 
   const categorys = (item:any, index:number) => (
     <TouchableOpacity key={index} style = {styles.categorys} onPress = { () => {} }>
-      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorys, resizeMode : 'contain'}}/>
+      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorysImage, resizeMode : 'contain'}}/>
       <Text>Test</Text>
     </TouchableOpacity>
   )
 
   const items = (item:any, index:number) => (
     <TouchableOpacity key={index} style = {styles.itens} onPress = { () => {} }>
-      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itens, resizeMode : 'contain'}}/>
+      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itensImage, resizeMode : 'contain'}}/>
       <Text>Test</Text>
   </TouchableOpacity>
   )
@@ -45,6 +50,28 @@ const Home = () => {
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+
+      <View style={{marginVertical: 10}}>
+        <TouchableOpacity style={{marginLeft:'88%' }} >
+          <Icon name='shopping-cart' color='#333' size={25} />
+        </TouchableOpacity>
+      </View>
+      <View style={{flexDirection:'row'}}>
+        <TouchableOpacity style={{backgroundColor: '#3982F3', width:125, height: 30, borderRadius: 10, marginHorizontal: 20, alignItems: 'center', justifyContent:'center'}} >
+          <Text style={{color:'#fff', fontWeight: '600'}} >
+            Enviar para {nameUser}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{alignItems:'flex-end', marginLeft: 60}} >
+          <Text style={{fontSize: 10}}>
+            (alterar)
+          </Text>
+          <Text>
+            {distance}Km de distância 
+          </Text>
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.cardsContainer} >
         <ScrollView horizontal showsHorizontalScrollIndicator={false} >
           {[1,2,3,4,5].map((item, index) => topCards(item ,index))}
@@ -91,14 +118,24 @@ const styles = StyleSheet.create({
     width:320,
     height:'90%',
     borderRadius: 8,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    shadowColor:'#000',
+    shadowOffset:{
+      width:0,
+      height:1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 3,
   },
 
   itemContainer: {
     height: 110,
     width: '100%',
-    backgroundColor: '#f0f0f0',
-    marginTop:10
+    backgroundColor: '#fff',
+    marginTop:10,
+    paddingTop:10,
   },
 
   itens:{
@@ -107,7 +144,25 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginHorizontal: 5,
     alignItems:'center',
-    marginTop:5
+    marginTop:5,
+    shadowColor:'#000',
+    shadowOffset:{
+      width:0,
+      height:1
+    },
+    shadowOpacity: 0.12,
+    shadowRadius: 2.22,
+
+    elevation: 10,
+  },
+
+  itensImage:{
+    height:60,
+    width:60,
+    borderRadius: 50,
+    marginHorizontal: 5,
+    alignItems:'center',
+    marginTop:5,
   },
 
   categoryContainer: {
@@ -120,6 +175,24 @@ const styles = StyleSheet.create({
   categorys:{
     height:90,
     width:90,
+    borderRadius: 50,
+    marginHorizontal: 5,
+    alignItems:'center',
+    marginTop:5,
+    shadowColor:'#000',
+    shadowOffset:{
+      width:5,
+      height:5
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 10,
+  },
+
+  categorysImage:{
+    height:90,
+    width:90,
     borderRadius: 25,
     marginHorizontal: 5,
     alignItems:'center',
@@ -130,17 +203,27 @@ const styles = StyleSheet.create({
     height:200,
     width:'90%',
     marginHorizontal: 20,
+    marginBottom: 10,
     marginTop: 10,
     borderRadius: 8,
     backgroundColor:'#d7d7d8',
-    flexDirection:'row'
+    flexDirection:'row',
+    shadowColor:'#000',
+    shadowOffset:{
+      width:0,
+      height:1
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+
+    elevation: 5,
   },
 
   cardImage:{
     height: 200,
     width:'50%',
     borderRadius:8,
-    backgroundColor:'#fff'
+    backgroundColor:'#fff',
   },
 
   cardText:{
