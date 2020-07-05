@@ -1,18 +1,48 @@
 import React, {useEffect, useState} from 'react'
-import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text} from 'react-native'
+import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text, Dimensions} from 'react-native'
 import { Feather as Icon } from '@expo/vector-icons'
+import MapView, { Marker } from 'react-native-maps'
+import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 
 import axios from 'axios'
 
 const Home = () => {
-  const [initItems, setInitItems] = useState([])
+  const [itens, setItens] = useState([])
+  const [search, setSearch] = useState('eletronicos')
+
+  const [geolocation, setGeolocation] = useState({
+    latitude: -8.2701297,
+    longitude: -35.9696649,
+    latitudeDelta: 0.04,
+    longitudeDelta: 0.04
+  })
 
   const nameUser = 'Edu'
   const distance = 50
 
-  useEffect( () => {
+  useEffect(() => {
+    async function loadInitialPosition(){
+      const { granted } = await requestPermissionsAsync()
+      
+      if(granted){
+        const {coords} = await getCurrentPositionAsync({
+          enableHighAccuracy: true,
+        })
 
-  }, [])
+        setGeolocation({...coords, latitudeDelta: 0.014,
+          longitudeDelta: 0.014})
+      }
+    
+    } 
+
+    loadInitialPosition()
+
+  },[])
+
+  useEffect( () => {
+      axios.get(`https://mercadoaqui.herokuapp.com/search/sort/${search}?latitude=${geolocation.latitude}&longitude=${geolocation.longitude}`)
+        .then( response => setItens(response.data) )
+  }, [geolocation])
 
   const topCards = (item:any, index:number) => (
     <TouchableOpacity key={index} style = {styles.cards} onPress = { () => {} }>
@@ -37,13 +67,15 @@ const Home = () => {
   const products = (item: any, index:any) => (
     <View key={index} style = {styles.cardList} >
       <TouchableOpacity style={styles.cardImage} onPress = { () => {} }>
-        <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: '100%', resizeMode : 'contain'}}/>
+        <Image source={ {uri:item.thumbnail}} style = {{height: '100%', resizeMode : 'contain'}}/>
       </TouchableOpacity>
       <View style={styles.cardText}>
-        <Text>Titulo</Text>
-        <Text>Estado</Text>
-        <Text>Descrição</Text>
-        <Text>Tags</Text>
+        <Text style={{fontWeight:'bold', fontSize:16}} >{item.title}</Text>
+        <Text style={{marginTop:5}}>{item.address.city_name + (item.address.state_id.replace('BR-',' - '))}</Text>
+        <Text style={{marginTop:5}}>Os melhores produtos perto de você</Text>
+        <Text style={{marginTop:5, fontSize:14}}>#CompreLocal</Text>
+        <Text style={{marginTop:5, fontSize:14}}>{(item.geolocation.distance/1000).toFixed(0) + ' Km de distância'}</Text>
+
       </View>
     </View>
   )
@@ -72,11 +104,19 @@ const Home = () => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.cardsContainer} >
+      <View style={styles.containerMap} >
+        <MapView style={styles.mapStyle} 
+          initialRegion={geolocation}
+        >
+          <Marker coordinate={{latitude: geolocation.latitude, longitude:geolocation.longitude}} />
+        </MapView>
+      </View>
+
+      {/* <View style={styles.cardsContainer} >
         <ScrollView horizontal showsHorizontalScrollIndicator={false} >
           {[1,2,3,4,5].map((item, index) => topCards(item ,index))}
         </ScrollView>
-      </View>
+      </View> */}
 
       <View style={styles.categoryContainer}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} >
@@ -90,7 +130,7 @@ const Home = () => {
         </ScrollView>
       </View>
 
-      {[0,1,2,3,4,5,6,7,8,9,10].map((item, index) => products(item, index))}
+      {itens.map((item, index) => products(item, index))}
 
     </ScrollView>
   ) 
@@ -100,6 +140,7 @@ export default Home
 const styles = StyleSheet.create({
   container:{
     flex:1,
+    backgroundColor:'#fff'
   },
 
   main:{
@@ -142,7 +183,7 @@ const styles = StyleSheet.create({
     height:60,
     width:60,
     borderRadius: 25,
-    marginHorizontal: 5,
+    marginHorizontal: 11,
     alignItems:'center',
     marginTop:5,
     shadowColor:'#000',
@@ -168,15 +209,16 @@ const styles = StyleSheet.create({
   categoryContainer: {
     height: 130,
     width: '100%',
-    backgroundColor: '#f0f0f0',
+    // backgroundColor: '#fff',
     alignItems:'center',
+    marginLeft:10
   },
 
   categorys:{
     height:90,
     width:90,
     borderRadius: 50,
-    marginHorizontal: 5,
+    marginRight: 30,
     alignItems:'center',
     marginTop:5,
     shadowColor:'#000',
@@ -206,7 +248,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 10,
     borderRadius: 8,
-    backgroundColor:'#d7d7d8',
+    backgroundColor:'#fff',
     flexDirection:'row',
     shadowColor:'#000',
     shadowOffset:{
@@ -228,7 +270,8 @@ const styles = StyleSheet.create({
 
   cardText:{
     height:200,
-    width: 200
+    width: '45%',
+    marginTop:10,
   },
 
   title:{
@@ -239,12 +282,23 @@ const styles = StyleSheet.create({
   },
 
   description:{
-    color: '#6c6c80',
+    color: '#fff',
     fontSize: 16,
     marginTop: 16,
     fontFamily: 'Roboto_400Regular',
     maxWidth: 260,
     lineHeight: 24
-  }
+  },
 
+  containerMap: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginVertical:10
+  },
+  mapStyle: {
+    width: 332,
+    height: 360,
+    borderRadius: 8
+  },
 })
