@@ -7,6 +7,21 @@ import iconsCategory from '../utils/iconsCategory'
 
 import axios from 'axios'
 
+const iconsOption = [
+  {
+    title: 'Produtos',
+    uri: require('../../assets/options/package.png')
+  },
+  {
+    title: 'Supermercado',
+    uri:  require('../../assets/options/shopping-cart.png')
+  },
+  {
+    title: 'Serviços',
+    uri:  require('../../assets/options/users.png')
+  }
+]
+
 const Home = () => {
   const [itens, setItens] = useState([])
   const [search, setSearch] = useState('celular')
@@ -52,21 +67,24 @@ const Home = () => {
   )
 
   const categorys = (item:any, index:number) => (
-    <TouchableOpacity key={index} style = {styles.categorys} onPress = { () => {} }>
-      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorysImage, resizeMode : 'stretch'}}/>
-      <Text>Test</Text>
-    </TouchableOpacity>
+    <View key={index} style={{justifyContent:'center', alignContent:'center'}} >
+      <TouchableOpacity key={index} style = {styles.categorys} onPress = { () => {} }>
+        <Image source={ item.uri} style = {{...styles.categorysImage, resizeMode : 'contain'}}/>
+      </TouchableOpacity>
+      <Text style={{textAlign:'center', fontSize: 16, alignContent:'center'}} > {item.title} </Text>
+    </View>
   )
 
   const items = (title:string, iconUri:any, index:number) => {
     
-    return <View key={index} style={{justifyContent:'center'}} >
-      
+    return( 
+    <View key={index} style={{justifyContent:'center'}} >  
       <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
         <Image source={ iconUri } style = {{...styles.itensImage, resizeMode : 'contain'}}/>
       </TouchableOpacity>
       <Text style={{textAlign:'center'}}>{ title }</Text>
     </View>
+    )
   }
 
   const products = (item: any, index:any) => (
@@ -125,7 +143,7 @@ const Home = () => {
 
       <View style={styles.categoryContainer}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-          {[1,2,3].map((item, index) => categorys(item, index))}    
+          {iconsOption.map((item, index) => categorys(item, index))}    
         </ScrollView>
       </View>
 
@@ -213,16 +231,17 @@ const styles = StyleSheet.create({
     width: '100%',
     // backgroundColor: '#fff',
     alignItems:'center',
-    marginLeft:10
   },
 
   categorys:{
     height:90,
     width:90,
     borderRadius: 50,
-    marginRight: 30,
+    marginHorizontal:10,
     alignItems:'center',
     marginTop:5,
+    justifyContent:'center',
+    backgroundColor:'#fff',
     shadowColor:'#000',
     shadowOffset:{
       width:5,
@@ -235,12 +254,12 @@ const styles = StyleSheet.create({
   },
 
   categorysImage:{
-    height:90,
-    width:90,
-    borderRadius: 25,
-    marginHorizontal: 5,
-    alignItems:'center',
-    marginTop:5
+    height:50,
+    width:50,
+    // borderRadius: 25,
+    // marginHorizontal: 5,
+    // alignItems:'center',
+    // marginTop:5
   },
 
   cardList:{
