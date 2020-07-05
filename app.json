@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mlMobile",
-    "slug": "mlMobile",
+    "name": "Mercado Aqui",
+    "slug": "mercadoaqui",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
@@ -21,6 +21,12 @@
     },
     "web": {
       "favicon": "./assets/logo.png"
-    }
+    },
+    "sdkVersion": "38.0.0",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "description": ""
   }
 }

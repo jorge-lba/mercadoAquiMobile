@@ -5,6 +5,8 @@ import MapView, { Marker } from 'react-native-maps'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import iconsCategory from '../utils/iconsCategory'
 
+import Map from '../components/map'
+
 import axios from 'axios'
 
 const iconsOption = [
@@ -152,12 +154,12 @@ const Home = () => {
                 </Text>
               </TouchableOpacity>
             </View>
-
+                  {/* <Map /> */}
             <View style={styles.containerMap} >
               <MapView style={styles.mapStyle} 
                 initialRegion={geolocation}
               >
-                <Marker coordinate={{latitude: geolocation.latitude, longitude:geolocation.longitude}} />
+               {[geolocation].map((coords, index) => <Marker key={index} coordinate={coords} />)}
               </MapView>
             </View>
 
@@ -339,7 +341,6 @@ const styles = StyleSheet.create({
     maxWidth: 260,
     lineHeight: 24
   },
-
   containerMap: {
     flex: 1,
     alignItems: 'center',

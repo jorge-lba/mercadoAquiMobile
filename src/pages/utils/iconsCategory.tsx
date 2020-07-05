@@ -8,15 +8,23 @@ export default [
     iconUri: require('../../assets/categorys/smartphone.png')
   },
   {
-    title:'Jogos',
+    title:'Games',
     iconUri: require('../../assets/categorys/game-controller.png')
   },
   {
-    title:'Bêbes',
+    title:'Roupas',
     iconUri: require('../../assets/categorys/iron.png')
   },
   {
-    title:'Bêbes',
+    title:'Eletricos',
     iconUri: require('../../assets/categorys/monitor.png')
+  },
+  {
+    title:'Pets',
+    iconUri: require('../../assets/categorys/bone.png')
+  },
+  {
+    title:'Limpeza',
+    iconUri: require('../../assets/categorys/broom.png')
   },
 ]
