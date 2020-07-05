@@ -140,12 +140,12 @@ const Home = () => {
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
             <View style={{flexDirection:'row'}}>
-              <TouchableOpacity style={{backgroundColor: '#3982F3', width:125, height: 30, borderRadius: 10, marginHorizontal: 20, alignItems: 'center', justifyContent:'center'}} >
+              <TouchableOpacity style={{backgroundColor: '#3982F3', width:135, height: 30, borderRadius: 10, marginHorizontal: 20, alignItems: 'center', justifyContent:'center'}} >
                 <Text style={{color:'#fff', fontWeight: '600'}} >
-                  Enviar para {nameUser}
+                  <Icon name='map-pin' color ='#fff' size={14}/> Enviar para {nameUser}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={{alignItems:'flex-end', marginLeft: 60}} >
+              <TouchableOpacity style={{alignItems:'flex-end', marginLeft: 50}} >
                 <Text style={{fontSize: 10}}>
                   (alterar)
                 </Text>
