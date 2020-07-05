@@ -96,10 +96,10 @@ const Home = () => {
       </TouchableOpacity>
       <View style={styles.cardText}>
         <Text style={{fontWeight:'bold', fontSize:16}} >{item.title.slice(0, 24) + ' ...'}</Text>
-        <Text style={{marginTop:5}}>{item.address.city_name + (item.address.state_id.replace('BR-',' - '))}</Text>
-        <Text style={{marginTop:5}}>Os melhores produtos perto de você</Text>
-        <Text style={{marginTop:5, fontSize:14}}>#CompreLocal</Text>
-        <Text style={{marginTop:5, fontSize:14}}>{(item.geolocation.distance/1000).toFixed(0) + ' Km de distância'}</Text>
+        <Text style={{marginTop:5, fontSize:12}}>{item.address.city_name + (item.address.state_id.replace('BR-',' - '))}</Text>
+        <Text style={{marginTop:5, fontSize:12}}>Os melhores produtos perto de você</Text>
+        <Text style={{marginTop:5, fontSize:12}}>#CompreLocal</Text>
+        <Text style={{marginTop:5, fontSize:12,textAlign:'center', color: '#1c3267', fontWeight:'bold', borderColor:'#1c3267', borderWidth:1, borderRadius:10}}>{' ' + (item.geolocation.distance/1000).toFixed(0) + ' Km de distância ' }</Text>
 
       </View>
     </View>
@@ -145,6 +145,7 @@ const Home = () => {
                   <Icon name='map-pin' color ='#fff' size={14}/> Enviar para {nameUser}
                 </Text>
               </TouchableOpacity>
+
               <TouchableOpacity style={{alignItems:'flex-end', marginLeft: 50}} >
                 <Text style={{fontSize: 10}}>
                   (alterar)
@@ -321,9 +322,9 @@ const styles = StyleSheet.create({
   },
 
   cardText:{
-    height:200,
     width: '45%',
-    padding:5
+    padding:5,
+    justifyContent:'center',
   },
 
   title:{
