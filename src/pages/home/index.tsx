@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text, Linking} from 'react-native'
+import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text, Linking, TextInput, KeyboardAvoidingView, Platform} from 'react-native'
 import { Feather as Icon } from '@expo/vector-icons'
 import MapView, { Marker } from 'react-native-maps'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
@@ -93,7 +93,7 @@ const Home = () => {
         <Image source={ {uri:item.thumbnail}} style = {{height: '100%', resizeMode : 'contain'}}/>
       </TouchableOpacity>
       <View style={styles.cardText}>
-        <Text style={{fontWeight:'bold', fontSize:16}} >{item.title}</Text>
+        <Text style={{fontWeight:'bold', fontSize:16}} >{item.title.slice(0, 24) + ' ...'}</Text>
         <Text style={{marginTop:5}}>{item.address.city_name + (item.address.state_id.replace('BR-',' - '))}</Text>
         <Text style={{marginTop:5}}>Os melhores produtos perto de você</Text>
         <Text style={{marginTop:5, fontSize:14}}>#CompreLocal</Text>
@@ -103,59 +103,88 @@ const Home = () => {
     </View>
   )
 
+  const callSearch = () => {
+    axios.get(`https://mercadoaqui.herokuapp.com/search/sort/${search}?latitude=${geolocation.latitude}&longitude=${geolocation.longitude}`)
+        .then( response => setItens(response.data) )
+  }
+
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <>
+      <KeyboardAvoidingView style={{flex:1}} behavior={ Platform.OS === 'ios' ? 'padding' : undefined } >
 
-      <View style={{marginVertical: 10}}>
-        <TouchableOpacity style={{marginLeft:'88%' }} >
-          <Icon name='shopping-cart' color='#333' size={25} />
-        </TouchableOpacity>
-      </View>
-      <View style={{flexDirection:'row'}}>
-        <TouchableOpacity style={{backgroundColor: '#3982F3', width:125, height: 30, borderRadius: 10, marginHorizontal: 20, alignItems: 'center', justifyContent:'center'}} >
-          <Text style={{color:'#fff', fontWeight: '600'}} >
-            Enviar para {nameUser}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{alignItems:'flex-end', marginLeft: 60}} >
-          <Text style={{fontSize: 10}}>
-            (alterar)
-          </Text>
-          <Text>
-            {distance}Km de distância 
-          </Text>
-        </TouchableOpacity>
-      </View>
+        <View style={{paddingVertical: 10, paddingHorizontal:20 , flexDirection:'row', alignItems:'center', backgroundColor:'#fff'}}>
+              <TouchableOpacity >
+                <Icon name='shopping-cart' color='#333' size={25} />
+              </TouchableOpacity>
+            
+              <TextInput
+                  style={{
+                    height: 40,
+                    width: '78%',
+                    borderRadius:20,
+                    marginHorizontal:10,
+                    textAlign:"center",
+                    backgroundColor:'#f6f6f6'
+                  }}
+                  placeholder={'Buscar'}
+                  returnKeyType='go'
+                  onSubmitEditing={() => callSearch() }
+                  onChangeText={text => setSearch(text)}
+              />
+              <TouchableOpacity onPress={callSearch} >
+                <Icon name='search' color='#333' size={25} />
+              </TouchableOpacity>
+        </View>
+        <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
 
-      <View style={styles.containerMap} >
-        <MapView style={styles.mapStyle} 
-          initialRegion={geolocation}
-        >
-          <Marker coordinate={{latitude: geolocation.latitude, longitude:geolocation.longitude}} />
-        </MapView>
-      </View>
+            <View style={{flexDirection:'row'}}>
+              <TouchableOpacity style={{backgroundColor: '#3982F3', width:125, height: 30, borderRadius: 10, marginHorizontal: 20, alignItems: 'center', justifyContent:'center'}} >
+                <Text style={{color:'#fff', fontWeight: '600'}} >
+                  Enviar para {nameUser}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{alignItems:'flex-end', marginLeft: 60}} >
+                <Text style={{fontSize: 10}}>
+                  (alterar)
+                </Text>
+                <Text>
+                  {distance}Km de distância 
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-      {/* <View style={styles.cardsContainer} >
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-          {[1,2,3,4,5].map((item, index) => topCards(item ,index))}
+            <View style={styles.containerMap} >
+              <MapView style={styles.mapStyle} 
+                initialRegion={geolocation}
+              >
+                <Marker coordinate={{latitude: geolocation.latitude, longitude:geolocation.longitude}} />
+              </MapView>
+            </View>
+
+            {/* <View style={styles.cardsContainer} >
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+                {[1,2,3,4,5].map((item, index) => topCards(item ,index))}
+              </ScrollView>
+            </View> */}
+
+            <View style={styles.categoryContainer}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+                {iconsOption.map((item, index) => categorys(item, index))}    
+              </ScrollView>
+            </View>
+
+            <View style={styles.itemContainer}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} >
+                {iconsCategory.map((item, index) => items(item.title, item.iconUri, index))}
+              </ScrollView>
+            </View>
+
+            {itens.map((item, index) => products(item, index))}
+
         </ScrollView>
-      </View> */}
+      </KeyboardAvoidingView>
 
-      <View style={styles.categoryContainer}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-          {iconsOption.map((item, index) => categorys(item, index))}    
-        </ScrollView>
-      </View>
-
-      <View style={styles.itemContainer}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-          {iconsCategory.map((item, index) => items(item.title, item.iconUri, index))}
-        </ScrollView>
-      </View>
-
-      {itens.map((item, index) => products(item, index))}
-
-    </ScrollView>
+    </>
   ) 
 }
 export default Home
@@ -234,12 +263,11 @@ const styles = StyleSheet.create({
   },
 
   categorys:{
-    height:90,
-    width:90,
+    height:76,
+    width:76,
     borderRadius: 50,
-    marginHorizontal:10,
+    marginHorizontal:20,
     alignItems:'center',
-    marginTop:5,
     justifyContent:'center',
     backgroundColor:'#fff',
     shadowColor:'#000',
@@ -254,8 +282,8 @@ const styles = StyleSheet.create({
   },
 
   categorysImage:{
-    height:50,
-    width:50,
+    height:45,
+    width:45,
     // borderRadius: 25,
     // marginHorizontal: 5,
     // alignItems:'center',
@@ -268,6 +296,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 10,
     marginTop: 10,
+    padding:5,
     borderRadius: 8,
     backgroundColor:'#fff',
     flexDirection:'row',
@@ -286,13 +315,13 @@ const styles = StyleSheet.create({
     height: 200,
     width:'50%',
     borderRadius:8,
-    backgroundColor:'#fff',
+    padding:5,
   },
 
   cardText:{
     height:200,
     width: '45%',
-    marginTop:10,
+    padding:5
   },
 
   title:{
@@ -315,7 +344,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical:10
+    marginTop:10
   },
   mapStyle: {
     width: 332,
