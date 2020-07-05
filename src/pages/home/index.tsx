@@ -3,12 +3,13 @@ import {View, Image, StyleSheet, TouchableOpacity, ScrollView, Text, Dimensions}
 import { Feather as Icon } from '@expo/vector-icons'
 import MapView, { Marker } from 'react-native-maps'
 import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
+import iconsCategory from '../utils/iconsCategory'
 
 import axios from 'axios'
 
 const Home = () => {
   const [itens, setItens] = useState([])
-  const [search, setSearch] = useState('eletronicos')
+  const [search, setSearch] = useState('celular')
 
   const [geolocation, setGeolocation] = useState({
     latitude: -8.2701297,
@@ -46,23 +47,27 @@ const Home = () => {
 
   const topCards = (item:any, index:number) => (
     <TouchableOpacity key={index} style = {styles.cards} onPress = { () => {} }>
-      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
+      <Image source={ {uri:iconsCategory[0].iconUri}} style = {{height: 200, resizeMode : 'contain', margin: 5 }}/>
     </TouchableOpacity>
   )
 
   const categorys = (item:any, index:number) => (
     <TouchableOpacity key={index} style = {styles.categorys} onPress = { () => {} }>
-      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorysImage, resizeMode : 'contain'}}/>
+      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.categorysImage, resizeMode : 'stretch'}}/>
       <Text>Test</Text>
     </TouchableOpacity>
   )
 
-  const items = (item:any, index:number) => (
-    <TouchableOpacity key={index} style = {styles.itens} onPress = { () => {} }>
-      <Image source={ {uri:"http://mlb-s2-p.mlstatic.com/687012-MLA41826108211_052020-I.jpg"}} style = {{...styles.itensImage, resizeMode : 'contain'}}/>
-      <Text>Test</Text>
-  </TouchableOpacity>
-  )
+  const items = (title:string, iconUri:any, index:number) => {
+    
+    return <View key={index} style={{justifyContent:'center'}} >
+      
+      <TouchableOpacity style = {styles.itens} onPress = { () => {} }>
+        <Image source={ iconUri } style = {{...styles.itensImage, resizeMode : 'contain'}}/>
+      </TouchableOpacity>
+      <Text style={{textAlign:'center'}}>{ title }</Text>
+    </View>
+  }
 
   const products = (item: any, index:any) => (
     <View key={index} style = {styles.cardList} >
@@ -126,7 +131,7 @@ const Home = () => {
 
       <View style={styles.itemContainer}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} >
-          {[1,2,3,4,5,6,7,8,9,10].map((item, index) => items(item, index))}
+          {iconsCategory.map((item, index) => items(item.title, item.iconUri, index))}
         </ScrollView>
       </View>
 
@@ -182,10 +187,11 @@ const styles = StyleSheet.create({
   itens:{
     height:60,
     width:60,
-    borderRadius: 25,
+    borderRadius: 50,
     marginHorizontal: 11,
+    backgroundColor:'#fff',
     alignItems:'center',
-    marginTop:5,
+    justifyContent:'center',
     shadowColor:'#000',
     shadowOffset:{
       width:0,
@@ -198,12 +204,8 @@ const styles = StyleSheet.create({
   },
 
   itensImage:{
-    height:60,
-    width:60,
-    borderRadius: 50,
-    marginHorizontal: 5,
-    alignItems:'center',
-    marginTop:5,
+    height:40,
+    width:40,
   },
 
   categoryContainer: {
