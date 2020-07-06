@@ -9,7 +9,7 @@
 </p>
 
 
- ##Desafio
+ ## Desafio
 
 Estamos caminhando para um mundo novo, um cenário onde a tecnologia aplicada em serviços digitais poderá fazer a diferença na vida de muitos. Nós no Mercado Livre (MELI) estamos buscando formas de aproximar e conectar ainda mais as pessoas mesmo com o distanciamento social.
 
@@ -29,7 +29,7 @@ Quais serviços poderão fazer a diferença na sua vida e na vida das pessoas qu
  - Como esta solução cresce exponencialmente?
 
 
- ##REALIZAÇÃO
+ ## REALIZAÇÃO
  - [Shawee Oficial](https://shawee.io/)
 
  ##ORGANIZAÇÃO
@@ -52,13 +52,13 @@ _Uma experiência de compra única local com previsibilidade de entrega.
 
 Outros dependências em package.json
 
- ###Outros códigos fontes:
+ ### Outros códigos fontes:
  - [Mobile](https://expo.io/@jorgealegretti/mercadoaqui)
  - [backend](https://api.mercadolibre.com/sites/MLB/categories) 
 
 *vídeo*
 **PIT**
- - [Proposta](https://www.youtube.com/watch?v=COC1nNzc6nk&rel=0) 
+ - [Proposta](https://www.youtube.com/watch?v=v3_c7idB5ug) 
 
 DEMO VIDEO
  - [DEMO VIDEO](https://www.youtube.com/watch?v=YZxYDWtXPco&) 
@@ -90,7 +90,7 @@ npm install
 ```sh
  expo start
  ```
-
+[GiHub Guilherme Puentes](https://github.com/gpuentes/MercadoAqui)
 
  #### TIME 45
 
