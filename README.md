@@ -1,6 +1,6 @@
 # MercadoAqui
 
- ##Desafio
+## Desafio
 # Problema
 
 Estamos caminhando para um mundo novo, um cenário onde a tecnologia aplicada em serviços digitais poderá fazer a diferença na vida de muitos. Nós no Mercado Livre (MELI) estamos buscando formas de aproximar e conectar ainda mais as pessoas mesmo com o distanciamento social.
@@ -14,9 +14,9 @@ Quais serviços poderão fazer a diferença na sua vida e na vida das pessoas qu
 
 💭  Perguntas-chave
 
-##REALIZAÇÃO
+## REALIZAÇÃO
 https://shawee.io/
-ORGANIZAÇÃO
+## ORGANIZAÇÃO
 https://www.mercadolivre.com.br/
 
 # Sistema: Mercado Aqui
