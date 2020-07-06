@@ -35,8 +35,8 @@ Aplicação em react-native
 
 Outros dependências em package.json
 Outros códigos fontes:
-Mobile - [https://expo.io/@jorgealegretti/mercadoaqui]
-backend - [https://api.mercadolibre.com/sites/MLB/categories] 
+[Mobile Expo](https://expo.io/@jorgealegretti/mercadoaqui)
+[API Mercado Aqui](https://api.mercadolibre.com/sites/MLB/categories)
 
 *vídeo*
 **PIT**
